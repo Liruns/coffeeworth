@@ -33,6 +33,20 @@
 - 에러 메시지도 한국어
 - 코드 주석은 영어 또는 한국어 일관되게
 
+### 4. 디자인 시스템 준수
+- **UI 작업 전 반드시 `docs/14-design-system.md` 읽기**
+- 브랜드 컬러: `#FFDD00` (Primary), `#6F4E37` (Coffee Brown)
+- shadcn/ui 컴포넌트 기반, Tailwind CSS 사용
+- 버튼/카드/입력 필드 스타일 가이드 준수
+
+```typescript
+// ❌ 임의 색상 사용
+<Button className="bg-blue-500">
+
+// ✅ 브랜드 컬러 사용
+<Button className="bg-[#FFDD00] text-black hover:bg-[#E5C700]">
+```
+
 ---
 
 ## 기술 스택 (변경 금지)
@@ -334,6 +348,7 @@ try {
 | `docs/11-ui-specification.md` | UI 컴포넌트 |
 | `docs/12-implementation-guide.md` | 구현 순서 |
 | `docs/13-deployment.md` | 배포 |
+| `docs/14-design-system.md` | **디자인 시스템** (필독) |
 
 ---
 

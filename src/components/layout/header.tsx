@@ -14,7 +14,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Coffee className="h-5 w-5 text-yellow-500" />
+          <Coffee className="h-5 w-5 text-[#FFDD00]" />
           <span>{APP_NAME}</span>
         </Link>
 
