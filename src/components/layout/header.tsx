@@ -22,15 +22,15 @@ export function Header() {
           {isLoading ? (
             <div className="h-9 w-20 animate-pulse rounded-md bg-muted" />
           ) : session ? (
-            <Button asChild>
+            <Button asChild className="bg-[#FFDD00] text-black hover:bg-[#E5C700] font-bold rounded-lg shadow-sm">
               <Link href="/dashboard">대시보드</Link>
             </Button>
           ) : (
             <>
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" asChild className="font-semibold">
                 <Link href="/login">로그인</Link>
               </Button>
-              <Button asChild>
+              <Button asChild className="bg-[#FFDD00] text-black hover:bg-[#E5C700] font-bold rounded-lg shadow-sm">
                 <Link href="/login">시작하기</Link>
               </Button>
             </>

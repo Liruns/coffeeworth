@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { Sidebar } from '@/components/layout/sidebar';
+import { PageContainer } from '@/components/layout/page-container';
 
 export default async function DashboardLayout({
   children,
@@ -17,9 +18,9 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen">
       <Sidebar />
       <main className="flex-1 overflow-auto bg-muted/20">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 md:py-8 lg:px-8 lg:py-10">
+        <PageContainer maxWidth="xl" padding="sm">
           {children}
-        </div>
+        </PageContainer>
       </main>
     </div>
   );

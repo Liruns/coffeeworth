@@ -103,8 +103,8 @@ export function PaymentButton({
       <Button
         onClick={handlePayment}
         disabled={!isReady || isLoading}
-        className="w-full text-lg py-6"
-        style={{ backgroundColor: themeColor }}
+        className="w-full h-14 text-lg font-bold rounded-xl shadow-sm"
+        style={{ backgroundColor: themeColor, color: '#000' }}
       >
         {isLoading ? (
           <Loader2 className="mr-2 h-5 w-5 animate-spin" />

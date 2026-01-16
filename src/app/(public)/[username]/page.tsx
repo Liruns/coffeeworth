@@ -6,6 +6,9 @@ import { prisma } from '@/lib/prisma';
 import { CreatorCard } from '@/components/creator/creator-card';
 import { SupportForm } from '@/components/creator/support-form';
 import { SupportCard } from '@/components/creator/support-card';
+import { PublicLayout } from '@/components/layout/public-layout';
+import { Section } from '@/components/layout/section';
+import { PageContainer } from '@/components/layout/page-container';
 import { APP_NAME, APP_URL } from '@/constants';
 
 interface PageProps {
@@ -103,14 +106,10 @@ export default async function CreatorPage({ params }: PageProps) {
   const displayName = creator.name || creator.username || 'Creator';
 
   return (
-    <div className="relative min-h-screen bg-[#FFF8E7]/40 dark:bg-zinc-950 overflow-hidden">
-      {/* Dynamic Background */}
-      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-[#FFDD00]/10 blur-[120px] -z-10" />
-      <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[#6F4E37]/5 blur-[100px] -z-10" />
-
-      <div className="relative z-10 mx-auto max-w-2xl px-4 py-16 sm:px-6 md:py-28 lg:px-8">
-        {/* Creator Profile */}
-        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700" aria-label="크리에이터 프로필">
+    <PublicLayout padding="none" maxWidth="lg">
+      <Section className="py-12 md:py-20">
+        <PageContainer maxWidth="lg" padding="none" className="space-y-12">
+          {/* Creator Profile */}
           <CreatorCard
             name={creator.name}
             username={creator.username!}
@@ -121,57 +120,52 @@ export default async function CreatorPage({ params }: PageProps) {
             totalCoffees={creator.totalCoffees}
             socialLinks={creator.socialLinks as Record<string, string> | null}
           />
-        </section>
 
-        {/* Support Form */}
-        <div className="mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+          {/* Support Form */}
           <SupportForm
             creatorUsername={creator.username!}
             creatorName={displayName}
             coffeePrice={creator.coffeePrice}
             themeColor={creator.themeColor}
           />
-        </div>
 
-        {/* Recent Supports */}
-        <section className="mt-20 space-y-8 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500" aria-label="최근 후원 목록">
-          <div className="flex items-center gap-4">
-            <h2 className="text-2xl font-black tracking-tight text-[#6F4E37] dark:text-[#FFDD00]">최근 따뜻한 응원들</h2>
-            <div className="h-1 flex-1 bg-gradient-to-r from-[#FFDD00]/40 to-transparent rounded-full" />
-          </div>
-          
-          {creator.recentSupports.length > 0 ? (
-            <div className="grid gap-6">
-              {creator.recentSupports.map((support: { id: string; supporterName: string; coffeeCount: number; message: string | null; paidAt: Date | null }) => (
-                <SupportCard
-                  key={support.id}
-                  supporterName={support.supporterName}
-                  coffeeCount={support.coffeeCount}
-                  message={support.message}
-                  paidAt={support.paidAt!}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-white/50 dark:bg-zinc-900/50 rounded-[2.5rem] border-2 border-dashed border-[#FFDD00]/30 backdrop-blur-sm">
-              <Coffee className="h-12 w-12 text-[#FFDD00]/50 mx-auto mb-4" />
-              <p className="text-lg font-bold text-muted-foreground italic">아직 도착한 응원이 없어요.<br />첫 번째 따뜻한 마음을 전해보세요! ☕</p>
-            </div>
-          )}
-        </section>
+          {/* Recent Supports */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-bold">최근 따뜻한 응원들</h2>
+            
+            {creator.recentSupports.length > 0 ? (
+              <div className="grid gap-4">
+                {creator.recentSupports.map((support: any) => (
+                  <SupportCard
+                    key={support.id}
+                    supporterName={support.supporterName}
+                    coffeeCount={support.coffeeCount}
+                    message={support.message}
+                    paidAt={support.paidAt!}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 bg-muted/30 rounded-xl border border-dashed">
+                <Coffee className="h-10 w-10 text-muted-foreground/30 mx-auto mb-3" />
+                <p className="text-muted-foreground">아직 도착한 응원이 없어요.<br />첫 번째 따뜻한 마음을 전해보세요!</p>
+              </div>
+            )}
+          </section>
 
-        {/* Footer */}
-        <div className="mt-32 text-center">
-          <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-white/80 dark:bg-zinc-900/80 border border-[#FFDD00]/20 shadow-sm backdrop-blur-sm">
-            <span className="text-sm font-bold text-muted-foreground tracking-tight">Powered by</span>
-            <Link href="/" className="flex items-center gap-1.5 group">
-              <Coffee className="h-5 w-5 text-[#FFDD00] fill-[#FFDD00] group-hover:rotate-12 transition-transform" />
-              <span className="text-base font-black text-[#6F4E37] dark:text-[#FFDD00]">{APP_NAME}</span>
+          {/* Footer Branding */}
+          <div className="pt-12 text-center">
+            <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+              <span>Powered by</span>
+              <span className="font-bold text-foreground flex items-center gap-1">
+                <Coffee className="h-4 w-4 text-[#FFDD00]" />
+                {APP_NAME}
+              </span>
             </Link>
           </div>
-        </div>
-      </div>
-    </div>
+        </PageContainer>
+      </Section>
+    </PublicLayout>
   );
 }
 
