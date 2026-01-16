@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { Loader2, Check, X } from 'lucide-react';
+import { Loader2, Check, X, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -173,32 +173,32 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="space-y-8 max-w-4xl pb-20">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight">계정 설정</h1>
-        <p className="text-lg text-muted-foreground font-medium">내 프로필과 정산 정보를 관리하세요.</p>
+    <div className="space-y-10 max-w-4xl pb-24">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-4xl font-black tracking-tight">계정 설정</h1>
+        <p className="text-xl text-muted-foreground font-medium">나만의 브랜드와 정산 정보를 관리하세요.</p>
       </div>
 
-      <div className="grid gap-8">
+      <div className="grid gap-10">
         {/* Username Section */}
-        <Card className="rounded-xl border shadow-sm overflow-hidden">
-          <CardHeader className="bg-muted/20 border-b">
-            <CardTitle className="text-xl">사용자명 및 주소</CardTitle>
-            <CardDescription className="text-sm font-medium">
-              내 후원 페이지의 고유 주소를 설정합니다.
+        <Card className="rounded-[2rem] border-2 border-white dark:border-zinc-800 shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm dark:bg-zinc-900/80 transition-all hover:shadow-2xl">
+          <CardHeader className="bg-[#FFDD00]/5 border-b p-8">
+            <CardTitle className="text-2xl font-black">사용자명 및 주소</CardTitle>
+            <CardDescription className="text-base font-bold text-[#6F4E37]/70 dark:text-muted-foreground">
+              후원자들이 방문할 나만의 고유한 주소를 설정합니다.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6 pt-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end">
-              <div className="flex-1 space-y-2">
-                <Label className="text-sm font-bold uppercase tracking-wider text-muted-foreground">페이지 주소</Label>
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground mb-1">
+          <CardContent className="space-y-8 p-8">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end">
+              <div className="flex-1 space-y-3">
+                <Label className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">페이지 주소</Label>
+                <div className="flex items-center gap-2 text-sm font-bold text-[#6F4E37] mb-2 px-3 py-1 bg-[#FFF8E7] rounded-lg w-fit">
                   {APP_URL}/@
                 </div>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg font-bold text-muted-foreground">@</span>
+                <div className="relative group">
+                  <span className="absolute left-5 top-1/2 -translate-y-1/2 text-xl font-black text-muted-foreground group-focus-within:text-[#FFDD00] transition-colors">@</span>
                   <Input
-                    className="pl-8 h-12 text-lg font-semibold rounded-xl border-2 focus:border-[#FFDD00] transition-all"
+                    className="pl-12 h-16 text-xl font-black rounded-2xl border-2 focus:border-[#FFDD00] focus:ring-4 focus:ring-[#FFDD00]/10 transition-all bg-muted/20"
                     placeholder="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value.toLowerCase())}
@@ -208,93 +208,96 @@ export default function SettingsPage() {
               <Button
                 onClick={saveUsername}
                 disabled={usernameStatus !== 'available' || isSavingUsername}
-                className="h-12 px-8 rounded-xl font-bold bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-md transition-all"
+                className="h-16 px-10 rounded-2xl font-black text-lg bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-[0_8px_20px_rgba(255,221,0,0.3)] transition-all active:scale-95 disabled:opacity-50"
               >
-                {isSavingUsername ? <Loader2 className="h-5 w-5 animate-spin" /> : '사용자명 변경'}
+                {isSavingUsername ? <Loader2 className="h-6 w-6 animate-spin" /> : '사용자명 변경'}
               </Button>
             </div>
-            <div className="flex items-center gap-2 min-h-[20px]">
+            <div className="flex items-center gap-3 min-h-[24px]">
               {usernameStatus === 'checking' && (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin text-[#6F4E37]" />
-                  <span className="text-sm font-medium text-muted-foreground">중복 확인 중...</span>
+                  <Loader2 className="h-5 w-5 animate-spin text-[#6F4E37]" />
+                  <span className="text-base font-bold text-muted-foreground">중복 확인 중...</span>
                 </>
               )}
               {usernameStatus === 'available' && (
-                <>
-                  <Check className="h-4 w-4 text-green-500 font-bold" />
-                  <span className="text-sm font-bold text-green-500">멋진 이름이네요! 사용 가능한 사용자명입니다.</span>
-                </>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800 animate-in fade-in slide-in-from-left-2">
+                  <Check className="h-5 w-5 font-black" />
+                  <span className="text-base font-black uppercase tracking-tight">멋진 이름이네요! 사용 가능합니다.</span>
+                </div>
               )}
               {usernameStatus === 'taken' && (
-                <>
-                  <X className="h-4 w-4 text-destructive font-bold" />
-                  <span className="text-sm font-bold text-destructive">아쉽게도 이미 사용 중인 이름입니다.</span>
-                </>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-destructive/5 text-destructive border border-destructive/10">
+                  <X className="h-5 w-5 font-black" />
+                  <span className="text-base font-black">이미 사용 중인 이름입니다.</span>
+                </div>
               )}
               {usernameStatus === 'invalid' && (
-                <>
-                  <X className="h-4 w-4 text-destructive font-bold" />
-                  <span className="text-sm font-bold text-destructive">영문 소문자, 숫자, 밑줄만 가능해요 (3-20자)</span>
-                </>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-destructive/5 text-destructive border border-destructive/10">
+                  <X className="h-5 w-5 font-black" />
+                  <span className="text-base font-black tracking-tight">영문 소문자, 숫자, 밑줄만 가능 (3-20자)</span>
+                </div>
               )}
             </div>
           </CardContent>
         </Card>
 
         {/* Profile Form */}
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <Card className="rounded-xl border shadow-sm overflow-hidden">
-            <CardHeader className="bg-muted/20 border-b">
-              <CardTitle className="text-xl">프로필 정보</CardTitle>
-              <CardDescription className="text-sm font-medium">후원자들에게 보여지는 내 정보를 설정합니다.</CardDescription>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+          <Card className="rounded-[2rem] border-2 border-white dark:border-zinc-800 shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm dark:bg-zinc-900/80 transition-all hover:shadow-2xl">
+            <CardHeader className="bg-[#FFDD00]/5 border-b p-8">
+              <CardTitle className="text-2xl font-black">프로필 정보</CardTitle>
+              <CardDescription className="text-base font-bold text-[#6F4E37]/70 dark:text-muted-foreground">내 후원 페이지를 방문하는 팬들에게 보여질 정보입니다.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6 pt-6">
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-bold text-muted-foreground uppercase tracking-wider">표시 이름</Label>
+            <CardContent className="space-y-8 p-8">
+              <div className="grid gap-8 md:grid-cols-2">
+                <div className="space-y-3">
+                  <Label htmlFor="name" className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">표시 이름</Label>
                   <Input 
                     id="name" 
                     placeholder="홍길동" 
-                    className="h-11 rounded-lg border-muted-foreground/20" 
+                    className="h-14 rounded-2xl border-2 focus:border-[#FFDD00] transition-all bg-muted/20 text-lg font-bold" 
                     {...form.register('name')} 
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="coffeePrice" className="text-sm font-bold text-muted-foreground uppercase tracking-wider">커피 1잔 가격 (원)</Label>
-                  <Input
-                    id="coffeePrice"
-                    type="number"
-                    placeholder="3000"
-                    className="h-11 rounded-lg border-muted-foreground/20"
-                    {...form.register('coffeePrice', { valueAsNumber: true })}
-                  />
+                <div className="space-y-3">
+                  <Label htmlFor="coffeePrice" className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">커피 1잔 가격 (원)</Label>
+                  <div className="relative group">
+                    <span className="absolute right-5 top-1/2 -translate-y-1/2 font-black text-muted-foreground group-focus-within:text-[#6F4E37]">원</span>
+                    <Input
+                      id="coffeePrice"
+                      type="number"
+                      placeholder="3000"
+                      className="h-14 rounded-2xl border-2 focus:border-[#FFDD00] transition-all bg-muted/20 text-lg font-black"
+                      {...form.register('coffeePrice', { valueAsNumber: true })}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="bio" className="text-sm font-bold text-muted-foreground uppercase tracking-wider">자기소개</Label>
+              <div className="space-y-3">
+                <Label htmlFor="bio" className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">나의 소개 한마디</Label>
                 <Textarea
                   id="bio"
-                  placeholder="후원자들에게 나를 소개해보세요 (예: 따뜻한 커피 한 잔으로 오픈소스 개발을 응원해주세요!)"
-                  className="rounded-lg min-h-[120px] resize-none border-muted-foreground/20 p-4"
+                  placeholder="후원자들에게 나를 멋지게 소개해보세요! (예: 따뜻한 커피 한 잔으로 지속 가능한 오픈소스 생태계를 응원해주세요!)"
+                  className="rounded-3xl border-2 focus:border-[#FFDD00] transition-all bg-muted/20 p-6 min-h-[160px] resize-none text-lg font-medium leading-relaxed"
                   {...form.register('bio')}
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="themeColor" className="text-sm font-bold text-muted-foreground uppercase tracking-wider">브랜드 색상</Label>
+              <div className="space-y-3">
+                <Label htmlFor="themeColor" className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">브랜드 포인트 색상</Label>
                 <div className="flex gap-4">
-                  <div className="relative group cursor-pointer">
+                  <div className="relative h-14 w-28 overflow-hidden rounded-2xl border-2 border-muted shadow-inner group">
                     <Input
                       id="themeColor"
                       type="color"
-                      className="h-12 w-24 p-1 cursor-pointer rounded-lg border-2 border-muted"
+                      className="absolute inset-0 h-full w-full scale-150 cursor-pointer p-0 border-none"
                       {...form.register('themeColor')}
                     />
                   </div>
                   <Input
                     placeholder="#FFDD00"
                     {...form.register('themeColor')}
-                    className="flex-1 h-12 font-mono uppercase rounded-lg border-muted-foreground/20"
+                    className="flex-1 h-14 font-mono uppercase rounded-2xl border-2 focus:border-[#FFDD00] bg-muted/20 text-lg font-bold"
                   />
                 </div>
               </div>
@@ -302,100 +305,86 @@ export default function SettingsPage() {
           </Card>
 
           {/* Social Links */}
-          <Card className="rounded-xl border shadow-sm overflow-hidden">
-            <CardHeader className="bg-muted/20 border-b">
-              <CardTitle className="text-xl">소셜 미디어</CardTitle>
-              <CardDescription className="text-sm font-medium">연결하고 싶은 SNS 주소를 입력하세요.</CardDescription>
+          <Card className="rounded-[2rem] border-2 border-white dark:border-zinc-800 shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm dark:bg-zinc-900/80 transition-all hover:shadow-2xl">
+            <CardHeader className="bg-[#FFDD00]/5 border-b p-8">
+              <CardTitle className="text-2xl font-black">소셜 미디어 연결</CardTitle>
+              <CardDescription className="text-base font-bold text-[#6F4E37]/70 dark:text-muted-foreground">외부 링크를 통해 팬들이 당신을 더 자세히 알 수 있게 하세요.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-6 md:grid-cols-2 pt-6">
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">GitHub</Label>
-                <Input 
-                  placeholder="https://github.com/..." 
-                  className="h-11 rounded-lg border-muted-foreground/20"
-                  {...form.register('socialLinks.github')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">블로그 / 웹사이트</Label>
-                <Input 
-                  placeholder="https://..." 
-                  className="h-11 rounded-lg border-muted-foreground/20"
-                  {...form.register('socialLinks.blog')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Twitter (X)</Label>
-                <Input 
-                  placeholder="https://twitter.com/..." 
-                  className="h-11 rounded-lg border-muted-foreground/20"
-                  {...form.register('socialLinks.twitter')} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Instagram</Label>
-                <Input 
-                  placeholder="https://instagram.com/..." 
-                  className="h-11 rounded-lg border-muted-foreground/20"
-                  {...form.register('socialLinks.instagram')} 
-                />
-              </div>
+            <CardContent className="grid gap-8 md:grid-cols-2 p-8">
+              {[
+                { id: 'github', label: 'GitHub 주소', placeholder: 'https://github.com/...' },
+                { id: 'blog', label: '블로그 / 뉴스레터', placeholder: 'https://...' },
+                { id: 'twitter', label: 'Twitter (X) 주소', placeholder: 'https://twitter.com/...' },
+                { id: 'instagram', label: 'Instagram 주소', placeholder: 'https://instagram.com/...' },
+              ].map((link) => (
+                <div key={link.id} className="space-y-3">
+                  <Label className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">{link.label}</Label>
+                  <Input 
+                    placeholder={link.placeholder} 
+                    className="h-14 rounded-2xl border-2 focus:border-[#FFDD00] transition-all bg-muted/20 font-medium"
+                    {...form.register(`socialLinks.${link.id}` as any)} 
+                  />
+                </div>
+              ))}
             </CardContent>
           </Card>
 
           {/* Bank Account */}
-          <Card className="rounded-xl border shadow-sm overflow-hidden border-l-4 border-l-[#FFDD00]">
-            <CardHeader className="bg-[#FFF8E7] dark:bg-muted/40 border-b">
-              <CardTitle className="text-xl">정산 계좌 정보</CardTitle>
-              <CardDescription className="text-sm font-medium text-[#6F4E37] dark:text-muted-foreground">
-                매주 금요일에 수익금이 정산됩니다. 정확한 정보를 입력해주세요.
+          <Card className="rounded-[2rem] border-4 border-[#FFDD00] shadow-2xl overflow-hidden bg-white backdrop-blur-xl dark:bg-zinc-900 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <CardHeader className="bg-[#FFF8E7] dark:bg-muted/40 border-b p-8">
+              <div className="flex items-center gap-3 mb-2">
+                <Wallet className="h-6 w-6 text-[#6F4E37]" />
+                <CardTitle className="text-2xl font-black">수익금 정산 계좌</CardTitle>
+              </div>
+              <CardDescription className="text-base font-bold text-[#6F4E37]">
+                매주 금요일에 정산된 금액이 입금됩니다. 실명 확인이 된 계좌를 입력해주세요.
               </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-6 md:grid-cols-3 pt-6">
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">은행</Label>
+            <CardContent className="grid gap-8 md:grid-cols-3 p-8">
+              <div className="space-y-3">
+                <Label className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">은행</Label>
                 <Select
                   value={form.watch('bankCode') || ''}
                   onValueChange={(value) => form.setValue('bankCode', value)}
                 >
-                  <SelectTrigger className="h-11 rounded-lg border-muted-foreground/20">
+                  <SelectTrigger className="h-14 rounded-2xl border-2 border-[#FFDD00]/30 focus:border-[#FFDD00] transition-all bg-muted/20 font-bold">
                     <SelectValue placeholder="은행 선택" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-2xl shadow-2xl border-2">
                     {BANK_OPTIONS.map((bank) => (
-                      <SelectItem key={bank.value} value={bank.value}>
+                      <SelectItem key={bank.value} value={bank.value} className="rounded-xl my-1 font-bold">
                         {bank.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-              <div className="space-y-2 md:col-span-1">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">계좌번호</Label>
+              <div className="space-y-3 md:col-span-1">
+                <Label className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">계좌번호</Label>
                 <Input 
                   placeholder="'-' 제외 숫자만 입력" 
-                  className="h-11 rounded-lg border-muted-foreground/20"
+                  className="h-14 rounded-2xl border-2 border-[#FFDD00]/30 focus:border-[#FFDD00] transition-all bg-muted/20 text-lg font-black"
                   {...form.register('bankAccount')} 
                 />
               </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">예금주</Label>
+              <div className="space-y-3">
+                <Label className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">예금주 실명</Label>
                 <Input 
                   placeholder="예금주 성함" 
-                  className="h-11 rounded-lg border-muted-foreground/20"
+                  className="h-14 rounded-2xl border-2 border-[#FFDD00]/30 focus:border-[#FFDD00] transition-all bg-muted/20 text-lg font-black"
                   {...form.register('bankHolder')} 
                 />
               </div>
             </CardContent>
           </Card>
 
-          <div className="flex justify-end pt-4">
+          <div className="flex justify-center md:justify-end pt-6">
             <Button 
               type="submit" 
               disabled={isSaving}
-              className="h-14 px-12 rounded-xl text-lg font-bold bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-lg hover:shadow-xl transition-all"
+              className="h-20 px-20 rounded-[1.5rem] text-2xl font-black bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-[0_20px_50px_rgba(255,221,0,0.4)] transition-all hover:-translate-y-2 active:scale-95 disabled:opacity-50"
             >
-              {isSaving ? <Loader2 className="mr-2 h-6 w-6 animate-spin" /> : null}
+              {isSaving ? <Loader2 className="mr-3 h-8 w-8 animate-spin" /> : null}
               모든 설정 저장하기
             </Button>
           </div>
@@ -404,3 +393,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

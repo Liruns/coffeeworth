@@ -118,62 +118,76 @@ function ThanksContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF8E7]/30 dark:bg-background">
-      <div className="container max-w-lg py-12 md:py-24">
-        <Card className="text-center rounded-2xl border shadow-lg overflow-hidden">
-          <div className="h-2 bg-[#FFDD00]" />
-          <CardHeader className="pt-10">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#FFDD00]/20 animate-bounce">
-              <CheckCircle className="h-10 w-10 text-[#6F4E37]" />
+    <div className="relative min-h-screen bg-[#FFF8E7]/40 dark:bg-zinc-950 overflow-hidden px-4">
+      {/* Dynamic Background */}
+      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-[#FFDD00]/10 blur-[120px] -z-10 animate-pulse" />
+      <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[#6F4E37]/5 blur-[100px] -z-10" />
+
+      <div className="container max-w-lg py-16 md:py-32 relative z-10">
+        <Card className="text-center rounded-[3rem] border-4 border-white dark:border-zinc-800 shadow-[0_30px_70px_rgba(0,0,0,0.12)] overflow-hidden bg-white/90 backdrop-blur-xl dark:bg-zinc-900/90 animate-in zoom-in-95 duration-700">
+          <div className="h-4 bg-gradient-to-r from-[#FFDD00] via-[#E5C700] to-[#FFDD00]" />
+          
+          <CardHeader className="pt-16 pb-8">
+            <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-[#FFDD00] shadow-[0_15px_30px_rgba(255,221,0,0.4)] animate-bounce duration-[2000ms]">
+              <CheckCircle className="h-12 w-12 text-black fill-black/10" />
             </div>
-            <CardTitle className="text-3xl font-bold tracking-tight text-[#6F4E37]">후원 완료!</CardTitle>
-            <CardDescription className="text-base font-medium">
-              따뜻한 마음이 성공적으로 전달되었습니다
-            </CardDescription>
+            <div className="space-y-3">
+              <CardTitle className="text-4xl font-black tracking-tight text-[#6F4E37] dark:text-[#FFDD00]">후원 완료!</CardTitle>
+              <CardDescription className="text-lg font-bold text-muted-foreground italic">
+                따뜻한 마음이 성공적으로 전달되었습니다
+              </CardDescription>
+            </div>
           </CardHeader>
-          <CardContent className="space-y-8 px-8 pb-10">
+
+          <CardContent className="space-y-10 px-8 md:px-12 pb-16">
             {support && (
-              <div className="rounded-2xl bg-white dark:bg-muted p-8 border border-[#FFDD00]/30 shadow-inner">
-                <div className="flex items-center justify-center gap-2 text-3xl mb-4">
-                  <span className="animate-pulse">{DEFAULT_COFFEE_EMOJI}</span>
-                  <span className="font-bold">x {support.coffeeCount}</span>
+              <div className="relative rounded-[2.5rem] bg-gradient-to-br from-[#FFF8E7] to-[#FFF1C1] dark:from-zinc-800 dark:to-zinc-900 p-10 border-2 border-[#FFDD00]/30 shadow-inner group transition-all hover:shadow-md">
+                <div className="absolute top-4 right-4 text-[#FFDD00]/20 font-black text-6xl italic select-none">Receipt</div>
+                
+                <div className="flex flex-col items-center gap-2 mb-6">
+                  <div className="flex items-center justify-center gap-3 text-4xl">
+                    <span className="animate-pulse">{DEFAULT_COFFEE_EMOJI}</span>
+                    <span className="font-black text-[#6F4E37] dark:text-foreground">x {support.coffeeCount}</span>
+                  </div>
+                  <div className="h-1 w-20 bg-[#6F4E37]/10 rounded-full" />
                 </div>
-                <p className="text-4xl font-extrabold text-[#6F4E37] dark:text-[#FFDD00]">
+                
+                <p className="text-5xl font-black text-[#6F4E37] dark:text-[#FFDD00] tracking-tighter">
                   {support.amount.toLocaleString()}원
                 </p>
-                <p className="mt-3 text-base font-semibold text-muted-foreground">
-                  {support.creatorName}님에게 큰 힘이 됩니다
+                
+                <p className="mt-4 text-lg font-bold text-[#6F4E37]/70 dark:text-muted-foreground leading-relaxed">
+                  {support.creatorName}님에게<br />큰 창작의 힘이 되었습니다
                 </p>
+
                 {support.message && (
-                  <div className="mt-6 relative">
-                    <div className="absolute -left-2 -top-2 text-4xl text-[#FFDD00]/20 font-serif">&ldquo;</div>
-                    <p className="px-4 py-2 text-base italic text-foreground/80 leading-relaxed">
-                      {support.message}
+                  <div className="mt-8 relative p-6 bg-white/50 dark:bg-black/20 rounded-2xl border border-white dark:border-zinc-700 italic">
+                    <p className="text-lg font-medium text-foreground/80 leading-relaxed">
+                      "{support.message}"
                     </p>
-                    <div className="absolute -right-2 -bottom-2 text-4xl text-[#FFDD00]/20 font-serif">&rdquo;</div>
                   </div>
                 )}
               </div>
             )}
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               <Button 
                 onClick={handleShare} 
                 variant="outline" 
-                className="w-full h-12 rounded-xl border-2 hover:bg-[#FFF8E7] transition-all"
+                className="w-full h-16 rounded-2xl border-2 font-black text-lg transition-all hover:bg-[#FFF8E7] dark:hover:bg-zinc-800 hover:border-[#FFDD00]/50 active:scale-95"
               >
-                <Share2 className="mr-2 h-5 w-5" />
-                응원 공유하기
+                <Share2 className="mr-3 h-6 w-6 text-[#6F4E37] dark:text-[#FFDD00]" />
+                이 소식을 친구들에게 공유하기
               </Button>
-              <Button asChild className="w-full h-12 rounded-xl text-lg font-bold bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-md transition-all">
+              <Button asChild className="w-full h-20 rounded-2xl text-xl font-black bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-[0_15px_30px_rgba(255,221,0,0.3)] transition-all hover:-translate-y-1 active:scale-95">
                 <Link href={`/${username}`}>
-                  <Coffee className="mr-2 h-5 w-5" />
+                  <Coffee className="mr-3 h-8 w-8 fill-black/10" />
                   크리에이터 페이지로 돌아가기
                 </Link>
               </Button>
             </div>
 
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-sm font-black text-muted-foreground/60 tracking-widest uppercase">
               {APP_NAME}를 이용해주셔서 감사합니다 ☕
             </p>
           </CardContent>
@@ -182,6 +196,7 @@ function ThanksContent() {
     </div>
   );
 }
+
 
 export default function ThanksPage() {
   return (

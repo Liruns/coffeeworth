@@ -34,121 +34,123 @@ export default function HomePage() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-background py-20 md:py-32">
-          {/* Background Decoration */}
-          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#FFDD00]/10 blur-3xl" />
-          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#6F4E37]/5 blur-3xl" />
+        <section className="relative overflow-hidden bg-background py-24 md:py-40">
+          {/* Background Decoration - More layered and premium */}
+          <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#FFDD00]/20 blur-[100px] animate-pulse" />
+          <div className="absolute top-1/2 -left-40 h-[400px] w-[400px] rounded-full bg-[#6F4E37]/10 blur-[80px]" />
           
-          <div className="container relative z-10 mx-auto px-4 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF8E7] px-4 py-1.5 text-sm font-medium text-[#6F4E37] dark:bg-[#6F4E37]/20 dark:text-[#FFDD00]">
-              <Sparkles className="h-4 w-4" />
-              <span>한국 크리에이터를 위한 새로운 후원 문화</span>
+          <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF8E7] px-5 py-2 text-sm font-semibold text-[#6F4E37] dark:bg-[#6F4E37]/40 dark:text-[#FFDD00] shadow-sm border border-[#FFDD00]/20">
+              <Sparkles className="h-4 w-4 text-[#FFDD00]" />
+              <span>한국 크리에이터를 위한 가장 따뜻한 후원</span>
             </div>
             
-            <h1 className="mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+            <h1 className="mt-10 text-5xl font-extrabold tracking-tight text-foreground sm:text-7xl leading-[1.1]">
               {APP_NAME}
             </h1>
-            <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
-              당신의 콘텐츠에 커피 한 잔의 응원을.<br className="hidden sm:block" />
-              복잡한 절차 없이 팬들에게 직접 후원을 받아보세요.
+            <p className="mt-8 text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">
+              좋아하는 크리에이터에게<br />
+              <span className="text-[#6F4E37] dark:text-[#FFDD00] font-bold underline underline-offset-8 decoration-[#FFDD00]/40">커피 한 잔의 응원</span>을 직접 전달하세요.
             </p>
             
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row">
               <Button 
                 size="lg" 
-                className="bg-[#FFDD00] text-black hover:bg-[#E5C700] text-lg font-bold h-14 px-8 rounded-full shadow-lg transition-transform hover:scale-105"
+                className="bg-[#FFDD00] text-black hover:bg-[#E5C700] text-xl font-bold h-16 px-10 rounded-2xl shadow-[0_8px_30px_rgb(255,221,0,0.3)] transition-all hover:scale-105 active:scale-95"
                 asChild
               >
                 <Link href="/login">
-                  시작하기 <ArrowRight className="ml-2 h-5 w-5" />
+                  지금 바로 시작하기 <ArrowRight className="ml-2 h-6 w-6" />
                 </Link>
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="text-lg h-14 px-8 rounded-full border-2"
+                className="text-lg h-16 px-10 rounded-2xl border-2 hover:bg-muted/50 transition-all font-semibold"
                 asChild
               >
-                <Link href="#features">더 알아보기</Link>
+                <Link href="#features">기능 살펴보기</Link>
               </Button>
             </div>
             
-            <div className="mt-16 flex items-center justify-center gap-8 text-muted-foreground grayscale opacity-70">
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-foreground">3,000원</span>
-                <span className="text-sm">기본 커피 한 잔</span>
+            <div className="mt-20 flex flex-wrap items-center justify-center gap-8 md:gap-16 text-muted-foreground">
+              <div className="flex flex-col items-center group">
+                <span className="text-4xl font-black text-foreground group-hover:text-[#6F4E37] transition-colors">3,000원</span>
+                <span className="text-sm font-bold tracking-widest uppercase mt-2">기본 커피 가격</span>
               </div>
-              <div className="h-10 w-px bg-border" />
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-foreground">{platformFeePercentage}%</span>
-                <span className="text-sm">투명한 수수료</span>
+              <div className="hidden md:block h-12 w-px bg-border/50" />
+              <div className="flex flex-col items-center group">
+                <span className="text-4xl font-black text-foreground group-hover:text-[#6F4E37] transition-colors">{platformFeePercentage}%</span>
+                <span className="text-sm font-bold tracking-widest uppercase mt-2">업계 최저 수수료</span>
               </div>
-              <div className="h-10 w-px bg-border" />
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-foreground">1분</span>
-                <span className="text-sm">간편한 가입</span>
+              <div className="hidden md:block h-12 w-px bg-border/50" />
+              <div className="flex flex-col items-center group">
+                <span className="text-4xl font-black text-foreground group-hover:text-[#6F4E37] transition-colors">5초</span>
+                <span className="text-sm font-bold tracking-widest uppercase mt-2">초간편 가입</span>
               </div>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section id="features" className="bg-muted/30 py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                크리에이터를 위한 최고의 선택
+        <section id="features" className="bg-[#FFF8E7]/30 py-32 border-y border-[#FFDD00]/10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl font-black tracking-tight sm:text-5xl text-[#6F4E37]">
+                크리에이터를 위한 따뜻한 공간
               </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                복잡한 설정은 생략하고, 창작 활동에만 집중하세요.
+              <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
+                팬들의 응원이 실질적인 수익으로 이어지도록<br />
+                가장 심플하고 강력한 도구를 제공합니다.
               </p>
             </div>
             
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-              <Card className="border-none shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
-                <CardHeader>
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF8E7] text-[#6F4E37] dark:bg-[#6F4E37]/30 dark:text-[#FFDD00]">
-                    <Coffee className="h-6 w-6" />
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+              <Card className="group border-none shadow-[0_4px_20px_rgba(0,0,0,0.03)] bg-white transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 rounded-[2rem] overflow-hidden">
+                <CardHeader className="p-8">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF8E7] text-[#6F4E37] group-hover:bg-[#FFDD00] group-hover:text-black transition-colors duration-300">
+                    <Coffee className="h-7 w-7" />
                   </div>
-                  <CardTitle>간편한 후원 페이지</CardTitle>
-                  <CardDescription>
-                    로그인 한 번이면 나만의 후원 페이지가 완성됩니다. <code>/@아이디</code> 링크만 공유하세요.
+                  <CardTitle className="text-2xl font-bold">심플한 후원 링크</CardTitle>
+                  <CardDescription className="text-base font-medium leading-relaxed pt-2">
+                    나만의 고유 주소를 공유하세요. 팬들은 복잡한 가입 없이 바로 후원할 수 있습니다.
                   </CardDescription>
                 </CardHeader>
               </Card>
 
-              <Card className="border-none shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
-                <CardHeader>
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF8E7] text-[#6F4E37] dark:bg-[#6F4E37]/30 dark:text-[#FFDD00]">
-                    <Zap className="h-6 w-6" />
+
+              <Card className="group border-none shadow-[0_4px_20px_rgba(0,0,0,0.03)] bg-white transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 rounded-[2rem] overflow-hidden">
+                <CardHeader className="p-8">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF8E7] text-[#6F4E37] group-hover:bg-[#FFDD00] group-hover:text-black transition-colors duration-300">
+                    <Zap className="h-7 w-7" />
                   </div>
-                  <CardTitle>카카오페이/토스 결제</CardTitle>
-                  <CardDescription>
-                    한국인이 가장 많이 사용하는 간편 결제를 모두 지원합니다. 클릭 한 번으로 끝나는 후원 경험.
+                  <CardTitle className="text-2xl font-bold">간편한 결제 시스템</CardTitle>
+                  <CardDescription className="text-base font-medium leading-relaxed pt-2">
+                    카카오페이, 토스페이 등 한국인이 선호하는 모든 결제 수단을 클릭 한 번으로 제공합니다.
                   </CardDescription>
                 </CardHeader>
               </Card>
 
-              <Card className="border-none shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
-                <CardHeader>
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF8E7] text-[#6F4E37] dark:bg-[#6F4E37]/30 dark:text-[#FFDD00]">
-                    <Bell className="h-6 w-6" />
+              <Card className="group border-none shadow-[0_4px_20px_rgba(0,0,0,0.03)] bg-white transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 rounded-[2rem] overflow-hidden">
+                <CardHeader className="p-8">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF8E7] text-[#6F4E37] group-hover:bg-[#FFDD00] group-hover:text-black transition-colors duration-300">
+                    <Bell className="h-7 w-7" />
                   </div>
-                  <CardTitle>실시간 알림</CardTitle>
-                  <CardDescription>
-                    후원이 발생하면 즉시 이메일과 알림을 보내드립니다. 팬들의 소중한 응원을 놓치지 마세요.
+                  <CardTitle className="text-2xl font-bold">실시간 소통 알림</CardTitle>
+                  <CardDescription className="text-base font-medium leading-relaxed pt-2">
+                    후원 메시지가 도착하면 즉시 알림을 드립니다. 팬들의 소중한 목소리에 바로 응답하세요.
                   </CardDescription>
                 </CardHeader>
               </Card>
 
-              <Card className="border-none shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
-                <CardHeader>
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF8E7] text-[#6F4E37] dark:bg-[#6F4E37]/30 dark:text-[#FFDD00]">
-                    <Shield className="h-6 w-6" />
+              <Card className="group border-none shadow-[0_4px_20px_rgba(0,0,0,0.03)] bg-white transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 rounded-[2rem] overflow-hidden">
+                <CardHeader className="p-8">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF8E7] text-[#6F4E37] group-hover:bg-[#FFDD00] group-hover:text-black transition-colors duration-300">
+                    <Shield className="h-7 w-7" />
                   </div>
-                  <CardTitle>투명한 수수료</CardTitle>
-                  <CardDescription>
-                    플랫폼 수수료는 단 {platformFeePercentage}%뿐입니다. 크리에이터의 수익을 최우선으로 생각합니다.
+                  <CardTitle className="text-2xl font-bold">투명한 정산 관리</CardTitle>
+                  <CardDescription className="text-base font-medium leading-relaxed pt-2">
+                    수수료는 단 {platformFeePercentage}%뿐입니다. 매주 금요일, 정직하게 정산된 수익금을 확인하세요.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -157,48 +159,49 @@ export default function HomePage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <section className="py-32 relative overflow-hidden">
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 h-64 w-64 bg-[#FFDD00]/5 blur-[80px]" />
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-24">
+              <h2 className="text-4xl font-black tracking-tight sm:text-5xl">
                 어떻게 시작하나요?
               </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                단 3단계면 후원을 받을 준비가 끝납니다.
+              <p className="mt-6 text-xl text-muted-foreground font-medium">
+                복잡한 과정 없이 3분 만에 모든 준비를 마칠 수 있습니다.
               </p>
             </div>
             
-            <div className="relative grid gap-12 md:grid-cols-3">
-              {/* Connector line for desktop */}
-              <div className="absolute top-24 left-1/4 right-1/4 hidden h-0.5 bg-border md:block" />
+            <div className="relative grid gap-20 md:grid-cols-3">
+              {/* Desktop Connection Path */}
+              <div className="absolute top-16 left-1/4 right-1/4 hidden h-1 border-t-4 border-dashed border-[#FFDD00]/20 md:block" />
               
-              <div className="relative flex flex-col items-center text-center">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#FFDD00] text-black text-2xl font-bold z-10 shadow-lg">
+              <div className="relative flex flex-col items-center text-center group">
+                <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-[2.5rem] bg-[#FFDD00] text-black text-3xl font-black z-10 shadow-[0_10px_30px_rgba(255,221,0,0.4)] group-hover:scale-110 transition-transform">
                   1
                 </div>
-                <h3 className="text-xl font-bold mb-2">가입하고 페이지 만들기</h3>
-                <p className="text-muted-foreground">
-                  카카오 계정으로 5초 만에 가입하고<br />나만의 프로필을 설정하세요.
+                <h3 className="text-2xl font-bold mb-4">페이지 개설</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed font-medium px-4">
+                  카카오 계정으로 간편하게 가입하고<br />나만의 프로필을 개성 있게 꾸미세요.
                 </p>
               </div>
 
-              <div className="relative flex flex-col items-center text-center">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#FFDD00] text-black text-2xl font-bold z-10 shadow-lg">
+              <div className="relative flex flex-col items-center text-center group">
+                <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-[2.5rem] bg-[#FFDD00] text-black text-3xl font-black z-10 shadow-[0_10px_30px_rgba(255,221,0,0.4)] group-hover:scale-110 transition-transform">
                   2
                 </div>
-                <h3 className="text-xl font-bold mb-2">링크 공유하기</h3>
-                <p className="text-muted-foreground">
-                  블로그, 유튜브, 깃허브 등<br />콘텐츠가 있는 곳에 후원 링크를 걸어주세요.
+                <h3 className="text-2xl font-bold mb-4">링크 공유</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed font-medium px-4">
+                  블로그, 깃허브, SNS 프로필 등<br />나의 링크를 어디든 자유롭게 거세요.
                 </p>
               </div>
 
-              <div className="relative flex flex-col items-center text-center">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#FFDD00] text-black text-2xl font-bold z-10 shadow-lg">
+              <div className="relative flex flex-col items-center text-center group">
+                <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-[2.5rem] bg-[#FFDD00] text-black text-3xl font-black z-10 shadow-[0_10px_30px_rgba(255,221,0,0.4)] group-hover:scale-110 transition-transform">
                   3
                 </div>
-                <h3 className="text-xl font-bold mb-2">후원 받기</h3>
-                <p className="text-muted-foreground">
-                  팬들의 소중한 커피 한 잔을 받고<br />활동을 이어나갈 힘을 얻으세요.
+                <h3 className="text-2xl font-bold mb-4">응원 받기</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed font-medium px-4">
+                  팬들이 보내주는 따뜻한 응원과<br />커피 한 잔으로 창작의 힘을 얻으세요.
                 </p>
               </div>
             </div>
@@ -206,57 +209,66 @@ export default function HomePage() {
         </section>
 
         {/* Social Proof / Stats Section */}
-        <section className="bg-[#6F4E37] py-20 text-white">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-12 md:grid-cols-3 text-center">
+        <section className="bg-[#6F4E37] py-28 text-white relative overflow-hidden">
+          <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-white/5 blur-[80px]" />
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-8 sm:gap-16 sm:grid-cols-2 md:grid-cols-3 text-center">
               <div>
-                <div className="text-4xl font-bold mb-2">1,000+</div>
-                <div className="text-amber-200/80">활동 중인 크리에이터</div>
+                <div className="text-6xl font-black mb-4 text-[#FFDD00]">1,000+</div>
+                <div className="text-xl font-bold text-amber-100/70 tracking-widest uppercase">활동 중인 크리에이터</div>
               </div>
               <div>
-                <div className="text-4xl font-bold mb-2">50,000+</div>
-                <div className="text-amber-200/80">누적 전달된 커피</div>
+                <div className="text-6xl font-black mb-4 text-[#FFDD00]">50,000+</div>
+                <div className="text-xl font-bold text-amber-100/70 tracking-widest uppercase">누적 전달된 응원</div>
               </div>
               <div>
-                <div className="text-4xl font-bold mb-2">98%</div>
-                <div className="text-amber-200/80">사용자 만족도</div>
+                <div className="text-6xl font-black mb-4 text-[#FFDD00]">99%</div>
+                <div className="text-xl font-bold text-amber-100/70 tracking-widest uppercase">사용자 만족도</div>
               </div>
             </div>
           </div>
         </section>
 
+
         {/* CTA Section */}
-        <section className="py-24">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="rounded-3xl bg-[#FFF8E7] p-8 md:p-16 text-center dark:bg-zinc-900 border border-[#FFDD00]/20">
-              <Heart className="mx-auto h-12 w-12 text-[#6F4E37] mb-6 dark:text-[#FFDD00]" />
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
-                당신의 창작 활동에 온기를 더하세요
+        <section className="py-32">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="relative rounded-[3rem] bg-[#FFF8E7] p-10 md:p-24 text-center dark:bg-zinc-900 border-2 border-[#FFDD00]/30 shadow-2xl overflow-hidden">
+              <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-[#FFDD00]/20 blur-3xl" />
+              <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-[#6F4E37]/10 blur-3xl" />
+              
+              <Heart className="mx-auto h-16 w-16 text-[#6F4E37] mb-8 dark:text-[#FFDD00] animate-pulse" />
+              <h2 className="text-4xl font-black tracking-tight sm:text-6xl text-foreground leading-[1.1]">
+                당신의 창작 활동에<br />따뜻함을 더하세요
               </h2>
-              <p className="mt-6 text-xl text-muted-foreground">
-                지금 바로 시작하고 팬들과 더 가깝게 소통하세요.<br />
-                가입은 무료이며, 후원이 발생할 때까지 비용이 들지 않습니다.
+              <p className="mt-8 text-xl md:text-2xl text-muted-foreground font-medium max-w-2xl mx-auto leading-relaxed">
+                지금 바로 {APP_NAME}와 함께 시작하세요.<br />
+                팬들과 더 가깝게 소통하며 소중한 응원을 받을 수 있습니다.
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Button 
                   size="lg" 
-                  className="bg-[#FFDD00] text-black hover:bg-[#E5C700] text-lg font-bold h-14 px-10 rounded-full shadow-xl w-full sm:w-auto"
+                  className="bg-[#FFDD00] text-black hover:bg-[#E5C700] text-xl font-bold h-16 px-12 rounded-[1.5rem] shadow-[0_10px_30px_rgba(255,221,0,0.3)] w-full sm:w-auto transition-transform hover:scale-105 active:scale-95"
                   asChild
                 >
-                  <Link href="/login">무료로 시작하기</Link>
+                  <Link href="/login">지금 시작하기 (무료)</Link>
                 </Button>
                 <Button 
                   size="lg" 
                   variant="ghost" 
-                  className="text-lg h-14 px-8 rounded-full w-full sm:w-auto"
+                  className="text-xl h-16 px-10 rounded-[1.5rem] w-full sm:w-auto font-bold text-[#6F4E37] dark:text-muted-foreground hover:bg-[#FFDD00]/10 transition-colors"
                   asChild
                 >
-                  <Link href="/contact">궁금한 점이 있으신가요?</Link>
+                  <Link href="/contact">궁금한 점 문의하기</Link>
                 </Button>
               </div>
+              <p className="mt-8 text-sm font-bold text-[#6F4E37]/60 dark:text-muted-foreground/60 tracking-wider">
+                가입은 무료이며, 후원이 발생할 때까지 수수료가 청구되지 않습니다.
+              </p>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />

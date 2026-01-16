@@ -32,71 +32,70 @@ function LoginForm() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* 카카오 로그인 */}
       <Button
-        className="w-full bg-[#FFDD00] text-black hover:bg-[#E5C700] h-11 rounded-lg font-bold"
+        className="w-full bg-[#FFDD00] text-black hover:bg-[#E5C700] h-14 rounded-2xl font-black text-lg shadow-md transition-all hover:shadow-lg active:scale-95"
         onClick={handleKakaoLogin}
         disabled={isLoading !== null}
       >
         {isLoading === 'kakao' ? (
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          <Loader2 className="mr-2 h-6 w-6 animate-spin" />
         ) : (
           <svg
-            className="mr-2 h-5 w-5"
+            className="mr-3 h-6 w-6"
             viewBox="0 0 24 24"
             fill="currentColor"
           >
             <path d="M12 3C6.477 3 2 6.463 2 10.714c0 2.683 1.763 5.037 4.402 6.388-.155.579-.997 3.734-1.03 3.964 0 0-.02.166.088.23.107.063.236.012.236.012.311-.044 3.613-2.37 4.186-2.773.702.102 1.43.155 2.118.155 5.523 0 10-3.463 10-7.714S17.523 3 12 3z" />
           </svg>
         )}
-        카카오로 시작하기
+        카카오로 5초 만에 시작하기
       </Button>
 
       {/* 개발용 로그인 (개발 모드에서만 표시) */}
       {isDevMode && (
-        <>
+        <div className="space-y-6 pt-2">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <Separator className="w-full" />
+              <Separator className="w-full bg-muted-foreground/10" />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                개발용 로그인
+            <div className="relative flex justify-center text-xs font-bold uppercase tracking-widest">
+              <span className="bg-white/80 dark:bg-zinc-900 px-3 text-muted-foreground/60">
+                개발 모드 테스트 로그인
               </span>
             </div>
           </div>
-          <div className="space-y-2">
-            <Input
-              type="email"
-              placeholder="test@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleDevLogin()}
-              className="h-11 rounded-lg"
-            />
+          <div className="space-y-3">
+            <div className="relative group">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-[#6F4E37] transition-colors" />
+              <Input
+                type="email"
+                placeholder="test@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleDevLogin()}
+                className="h-14 pl-12 rounded-2xl border-2 focus:border-[#FFDD00] focus:ring-0 transition-all text-base font-medium"
+              />
+            </div>
             <Button
               variant="outline"
-              className="w-full h-11 rounded-lg"
+              className="w-full h-14 rounded-2xl border-2 font-bold text-base hover:bg-[#FFF8E7] dark:hover:bg-zinc-800 transition-all active:scale-95"
               onClick={handleDevLogin}
               disabled={isLoading !== null || !email}
             >
               {isLoading === 'dev' ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Mail className="mr-2 h-4 w-4" />
-              )}
-              이메일로 테스트 로그인
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              ) : null}
+              테스트 계정으로 즉시 로그인
             </Button>
-            <p className="text-xs text-muted-foreground text-center">
-              * 개발 환경에서만 표시됩니다
-            </p>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
 }
+
 
 function LoginFormSkeleton() {
   return <Skeleton className="h-10 w-full" />;
@@ -104,34 +103,48 @@ function LoginFormSkeleton() {
 
 export default function LoginPage() {
   return (
-    <div className="container flex min-h-screen items-center justify-center bg-[#FFF8E7]/30 dark:bg-background">
-      <Card className="w-full max-w-md rounded-xl border shadow-sm">
-        <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#FFDD00]/20">
-            <Coffee className="h-8 w-8 text-[#6F4E37]" />
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#FFF8E7]/40 px-4 dark:bg-background sm:px-6 lg:px-8">
+      {/* Dynamic Background Elements */}
+      <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-[#FFDD00]/20 blur-[100px] animate-pulse" />
+      <div className="absolute -bottom-24 -right-24 h-[500px] w-[500px] rounded-full bg-[#6F4E37]/10 blur-[120px]" />
+
+      <Card className="relative w-full max-w-md rounded-[2.5rem] border-2 border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden bg-white/80 backdrop-blur-xl dark:bg-zinc-900/80">
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#FFDD00] via-[#6F4E37] to-[#FFDD00]" />
+        
+        <CardHeader className="space-y-4 pt-12 pb-8 text-center">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[2rem] bg-[#FFDD00] shadow-[0_10px_20px_rgba(255,221,0,0.4)] transition-transform hover:rotate-12">
+            <Coffee className="h-10 w-10 text-black fill-black/10" />
           </div>
-          <CardTitle className="text-3xl font-bold tracking-tight">{APP_NAME}</CardTitle>
-          <CardDescription className="text-base">
-            크리에이터를 위한 따뜻한 후원 플랫폼
-          </CardDescription>
+          <div className="space-y-2">
+            <CardTitle className="text-4xl font-black tracking-tight text-[#6F4E37] dark:text-[#FFDD00]">{APP_NAME}</CardTitle>
+            <CardDescription className="text-lg font-semibold text-muted-foreground leading-relaxed">
+              크리에이터와 팬을 잇는<br />가장 따뜻한 응원의 시작
+            </CardDescription>
+          </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+
+        <CardContent className="space-y-8 px-8 pb-12">
           <Suspense fallback={<LoginFormSkeleton />}>
             <LoginForm />
           </Suspense>
-          <p className="text-center text-xs text-muted-foreground">
-            로그인하면 {APP_NAME}의{' '}
-            <a href="/terms" className="underline underline-offset-4 hover:text-primary">
-              이용약관
-            </a>{' '}
-            및{' '}
-            <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
-              개인정보처리방침
-            </a>
-            에 동의하게 됩니다.
-          </p>
+          
+          <div className="space-y-4">
+            <Separator className="bg-muted-foreground/10" />
+            <p className="text-center text-xs font-medium text-muted-foreground leading-relaxed px-4">
+              로그인하면 {APP_NAME}의{' '}
+              <a href="/terms" className="text-[#6F4E37] dark:text-[#FFDD00] font-bold hover:underline underline-offset-4">
+                이용약관
+              </a>{' '}
+              및{' '}
+              <a href="/privacy" className="text-[#6F4E37] dark:text-[#FFDD00] font-bold hover:underline underline-offset-4">
+                개인정보처리방침
+              </a>
+              에 동의하는 것으로 간주됩니다.
+            </p>
+          </div>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 }
+

@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import type { Metadata } from 'next';
+import { Coffee } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import { CreatorCard } from '@/components/creator/creator-card';
 import { SupportForm } from '@/components/creator/support-form';
@@ -101,22 +103,28 @@ export default async function CreatorPage({ params }: PageProps) {
   const displayName = creator.name || creator.username || 'Creator';
 
   return (
-    <div className="min-h-screen bg-[#FFF8E7]/30 dark:bg-background">
-      <div className="container max-w-2xl py-12 md:py-20">
+    <div className="relative min-h-screen bg-[#FFF8E7]/40 dark:bg-zinc-950 overflow-hidden">
+      {/* Dynamic Background */}
+      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-[#FFDD00]/10 blur-[120px] -z-10" />
+      <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[#6F4E37]/5 blur-[100px] -z-10" />
+
+      <div className="relative z-10 mx-auto max-w-2xl px-4 py-16 sm:px-6 md:py-28 lg:px-8">
         {/* Creator Profile */}
-        <CreatorCard
-          name={creator.name}
-          username={creator.username!}
-          image={creator.image}
-          bio={creator.bio}
-          themeColor={creator.themeColor}
-          totalSupporters={creator.totalSupporters}
-          totalCoffees={creator.totalCoffees}
-          socialLinks={creator.socialLinks as Record<string, string> | null}
-        />
+        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700" aria-label="크리에이터 프로필">
+          <CreatorCard
+            name={creator.name}
+            username={creator.username!}
+            image={creator.image}
+            bio={creator.bio}
+            themeColor={creator.themeColor}
+            totalSupporters={creator.totalSupporters}
+            totalCoffees={creator.totalCoffees}
+            socialLinks={creator.socialLinks as Record<string, string> | null}
+          />
+        </section>
 
         {/* Support Form */}
-        <div className="mt-12">
+        <div className="mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
           <SupportForm
             creatorUsername={creator.username!}
             creatorName={displayName}
@@ -126,14 +134,14 @@ export default async function CreatorPage({ params }: PageProps) {
         </div>
 
         {/* Recent Supports */}
-        <div className="mt-12 space-y-6">
-          <div className="flex items-center gap-3">
-            <h2 className="text-xl font-bold tracking-tight">최근 후원자들</h2>
-            <div className="h-px flex-1 bg-border" />
+        <section className="mt-20 space-y-8 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500" aria-label="최근 후원 목록">
+          <div className="flex items-center gap-4">
+            <h2 className="text-2xl font-black tracking-tight text-[#6F4E37] dark:text-[#FFDD00]">최근 따뜻한 응원들</h2>
+            <div className="h-1 flex-1 bg-gradient-to-r from-[#FFDD00]/40 to-transparent rounded-full" />
           </div>
           
           {creator.recentSupports.length > 0 ? (
-            <div className="grid gap-4">
+            <div className="grid gap-6">
               {creator.recentSupports.map((support: { id: string; supporterName: string; coffeeCount: number; message: string | null; paidAt: Date | null }) => (
                 <SupportCard
                   key={support.id}
@@ -145,23 +153,25 @@ export default async function CreatorPage({ params }: PageProps) {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 bg-card rounded-xl border border-dashed">
-              <p className="text-muted-foreground">아직 후원이 없습니다. 첫 번째 후원자가 되어보세요!</p>
+            <div className="text-center py-20 bg-white/50 dark:bg-zinc-900/50 rounded-[2.5rem] border-2 border-dashed border-[#FFDD00]/30 backdrop-blur-sm">
+              <Coffee className="h-12 w-12 text-[#FFDD00]/50 mx-auto mb-4" />
+              <p className="text-lg font-bold text-muted-foreground italic">아직 도착한 응원이 없어요.<br />첫 번째 따뜻한 마음을 전해보세요! ☕</p>
             </div>
           )}
-        </div>
+        </section>
 
         {/* Footer */}
-        <div className="mt-20 text-center text-sm text-muted-foreground">
-          <p className="flex items-center justify-center gap-1.5 font-medium">
-            Powered by{' '}
-            <a href="/" className="text-[#6F4E37] hover:text-[#FFDD00] transition-colors font-bold">
-              {APP_NAME}
-            </a>
-            <span>☕</span>
-          </p>
+        <div className="mt-32 text-center">
+          <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-white/80 dark:bg-zinc-900/80 border border-[#FFDD00]/20 shadow-sm backdrop-blur-sm">
+            <span className="text-sm font-bold text-muted-foreground tracking-tight">Powered by</span>
+            <Link href="/" className="flex items-center gap-1.5 group">
+              <Coffee className="h-5 w-5 text-[#FFDD00] fill-[#FFDD00] group-hover:rotate-12 transition-transform" />
+              <span className="text-base font-black text-[#6F4E37] dark:text-[#FFDD00]">{APP_NAME}</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
