@@ -118,54 +118,63 @@ function ThanksContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-background dark:from-green-950/20">
-      <div className="container max-w-lg py-12">
-        <Card className="text-center">
-          <CardHeader>
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+    <div className="min-h-screen bg-[#FFF8E7]/30 dark:bg-background">
+      <div className="container max-w-lg py-12 md:py-24">
+        <Card className="text-center rounded-2xl border shadow-lg overflow-hidden">
+          <div className="h-2 bg-[#FFDD00]" />
+          <CardHeader className="pt-10">
+            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#FFDD00]/20 animate-bounce">
+              <CheckCircle className="h-10 w-10 text-[#6F4E37]" />
             </div>
-            <CardTitle className="text-2xl">후원 완료!</CardTitle>
-            <CardDescription>
-              따뜻한 마음이 전달되었습니다
+            <CardTitle className="text-3xl font-bold tracking-tight text-[#6F4E37]">후원 완료!</CardTitle>
+            <CardDescription className="text-base font-medium">
+              따뜻한 마음이 성공적으로 전달되었습니다
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-8 px-8 pb-10">
             {support && (
-              <div className="rounded-lg bg-muted p-4">
-                <div className="flex items-center justify-center gap-2 text-lg">
-                  <span>{DEFAULT_COFFEE_EMOJI}</span>
+              <div className="rounded-2xl bg-white dark:bg-muted p-8 border border-[#FFDD00]/30 shadow-inner">
+                <div className="flex items-center justify-center gap-2 text-3xl mb-4">
+                  <span className="animate-pulse">{DEFAULT_COFFEE_EMOJI}</span>
                   <span className="font-bold">x {support.coffeeCount}</span>
                 </div>
-                <p className="mt-2 text-2xl font-bold">
+                <p className="text-4xl font-extrabold text-[#6F4E37] dark:text-[#FFDD00]">
                   {support.amount.toLocaleString()}원
                 </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {support.creatorName}님에게 전달됩니다
+                <p className="mt-3 text-base font-semibold text-muted-foreground">
+                  {support.creatorName}님에게 큰 힘이 됩니다
                 </p>
                 {support.message && (
-                  <p className="mt-3 text-sm italic text-muted-foreground">
-                    &ldquo;{support.message}&rdquo;
-                  </p>
+                  <div className="mt-6 relative">
+                    <div className="absolute -left-2 -top-2 text-4xl text-[#FFDD00]/20 font-serif">&ldquo;</div>
+                    <p className="px-4 py-2 text-base italic text-foreground/80 leading-relaxed">
+                      {support.message}
+                    </p>
+                    <div className="absolute -right-2 -bottom-2 text-4xl text-[#FFDD00]/20 font-serif">&rdquo;</div>
+                  </div>
                 )}
               </div>
             )}
 
-            <div className="flex flex-col gap-2">
-              <Button onClick={handleShare} variant="outline" className="w-full">
-                <Share2 className="mr-2 h-4 w-4" />
-                공유하기
+            <div className="flex flex-col gap-3">
+              <Button 
+                onClick={handleShare} 
+                variant="outline" 
+                className="w-full h-12 rounded-xl border-2 hover:bg-[#FFF8E7] transition-all"
+              >
+                <Share2 className="mr-2 h-5 w-5" />
+                응원 공유하기
               </Button>
-              <Button asChild className="w-full">
+              <Button asChild className="w-full h-12 rounded-xl text-lg font-bold bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-md transition-all">
                 <Link href={`/${username}`}>
-                  <Coffee className="mr-2 h-4 w-4" />
-                  다시 후원하기
+                  <Coffee className="mr-2 h-5 w-5" />
+                  크리에이터 페이지로 돌아가기
                 </Link>
               </Button>
             </div>
 
-            <p className="text-xs text-muted-foreground">
-              {APP_NAME}를 이용해주셔서 감사합니다
+            <p className="text-sm font-medium text-muted-foreground">
+              {APP_NAME}를 이용해주셔서 감사합니다 ☕
             </p>
           </CardContent>
         </Card>

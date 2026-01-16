@@ -35,7 +35,7 @@ function LoginForm() {
     <div className="space-y-4">
       {/* 카카오 로그인 */}
       <Button
-        className="w-full bg-[#FEE500] text-black hover:bg-[#FDD835]"
+        className="w-full bg-[#FFDD00] text-black hover:bg-[#E5C700] h-11 rounded-lg font-bold"
         onClick={handleKakaoLogin}
         disabled={isLoading !== null}
       >
@@ -43,7 +43,7 @@ function LoginForm() {
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <svg
-            className="mr-2 h-4 w-4"
+            className="mr-2 h-5 w-5"
             viewBox="0 0 24 24"
             fill="currentColor"
           >
@@ -73,10 +73,11 @@ function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleDevLogin()}
+              className="h-11 rounded-lg"
             />
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full h-11 rounded-lg"
               onClick={handleDevLogin}
               disabled={isLoading !== null || !email}
             >
@@ -103,15 +104,15 @@ function LoginFormSkeleton() {
 
 export default function LoginPage() {
   return (
-    <div className="container flex min-h-screen items-center justify-center">
-      <Card className="w-full max-w-md">
+    <div className="container flex min-h-screen items-center justify-center bg-[#FFF8E7]/30 dark:bg-background">
+      <Card className="w-full max-w-md rounded-xl border shadow-sm">
         <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100">
-            <Coffee className="h-6 w-6 text-yellow-600" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#FFDD00]/20">
+            <Coffee className="h-8 w-8 text-[#6F4E37]" />
           </div>
-          <CardTitle className="text-2xl font-bold">{APP_NAME}</CardTitle>
-          <CardDescription>
-            크리에이터를 위한 후원 플랫폼에 오신 것을 환영합니다
+          <CardTitle className="text-3xl font-bold tracking-tight">{APP_NAME}</CardTitle>
+          <CardDescription className="text-base">
+            크리에이터를 위한 따뜻한 후원 플랫폼
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

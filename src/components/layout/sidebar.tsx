@@ -36,14 +36,14 @@ export function Sidebar() {
 
   const NavContent = () => (
     <>
-      <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-        <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
-          <Coffee className="h-5 w-5 text-yellow-500" />
+      <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 bg-white dark:bg-card">
+        <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl">
+          <Coffee className="h-6 w-6 text-[#FFDD00] fill-[#FFDD00]" />
           <span>{APP_NAME}</span>
         </Link>
       </div>
-      <div className="flex-1 overflow-auto py-2">
-        <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+      <div className="flex-1 overflow-auto py-4">
+        <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -52,29 +52,29 @@ export function Sidebar() {
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary',
+                  'flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200',
                   isActive
-                    ? 'bg-muted text-primary'
-                    : 'text-muted-foreground'
+                    ? 'bg-[#FFDD00] text-black shadow-sm font-bold'
+                    : 'text-muted-foreground hover:bg-[#FFF8E7] hover:text-[#6F4E37]'
                 )}
               >
-                <item.icon className="h-4 w-4" />
+                <item.icon className={cn('h-5 w-5', isActive ? 'text-black' : '')} />
                 {item.label}
               </Link>
             );
           })}
         </nav>
       </div>
-      <div className="mt-auto border-t p-4">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-9 w-9">
+      <div className="mt-auto border-t p-4 bg-white dark:bg-card">
+        <div className="flex items-center gap-3 p-2 rounded-xl border bg-muted/30">
+          <Avatar className="h-10 w-10 border-2 border-[#FFDD00]">
             <AvatarImage src={session?.user?.image || undefined} />
-            <AvatarFallback>
+            <AvatarFallback className="bg-[#FFDD00] text-black font-bold">
               {session?.user?.name?.charAt(0) || 'U'}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 overflow-hidden">
-            <p className="truncate text-sm font-medium">
+            <p className="truncate text-sm font-bold">
               {session?.user?.name || '사용자'}
             </p>
             <p className="truncate text-xs text-muted-foreground">
@@ -84,6 +84,7 @@ export function Sidebar() {
           <Button
             variant="ghost"
             size="icon"
+            className="text-muted-foreground hover:text-destructive hover:bg-destructive/10"
             onClick={() => signOut({ callbackUrl: '/' })}
             title="로그아웃"
           >
@@ -106,8 +107,8 @@ export function Sidebar() {
           <Menu className="h-5 w-5" />
           <span className="sr-only">메뉴 열기</span>
         </Button>
-        <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
-          <Coffee className="h-5 w-5 text-yellow-500" />
+        <Link href="/dashboard" className="flex items-center gap-2 font-bold text-xl">
+          <Coffee className="h-6 w-6 text-[#FFDD00] fill-[#FFDD00]" />
           <span>{APP_NAME}</span>
         </Link>
       </header>

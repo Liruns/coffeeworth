@@ -23,25 +23,27 @@ export function SupportCard({
   });
 
   return (
-    <Card>
-      <CardContent className="pt-4">
-        <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-100 text-lg">
+    <Card className="rounded-xl border shadow-sm transition-all hover:shadow-md">
+      <CardContent className="p-5">
+        <div className="flex items-start gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FFF8E7] text-2xl border border-[#FFDD00]/30">
             {DEFAULT_COFFEE_EMOJI}
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="font-medium truncate">{supporterName}</span>
-              <span className="text-sm text-muted-foreground">
-                x {coffeeCount}
-              </span>
+          <div className="flex-1 min-w-0 space-y-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-base truncate">{supporterName}</span>
+                <span className="text-sm font-semibold text-[#6F4E37] bg-[#FFDD00]/10 px-2 py-0.5 rounded-full">
+                  x {coffeeCount}
+                </span>
+              </div>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">{timeAgo}</span>
             </div>
             {message && (
-              <p className="mt-1 text-sm text-muted-foreground break-words">
-                {message}
-              </p>
+              <div className="relative mt-2 p-3 bg-muted/30 rounded-lg italic text-sm text-foreground/80 break-words">
+                "{message}"
+              </div>
             )}
-            <p className="mt-1 text-xs text-muted-foreground">{timeAgo}</p>
           </div>
         </div>
       </CardContent>

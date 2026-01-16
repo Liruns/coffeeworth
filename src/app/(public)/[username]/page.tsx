@@ -101,8 +101,8 @@ export default async function CreatorPage({ params }: PageProps) {
   const displayName = creator.name || creator.username || 'Creator';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-muted/50 to-background">
-      <div className="container max-w-2xl py-12">
+    <div className="min-h-screen bg-[#FFF8E7]/30 dark:bg-background">
+      <div className="container max-w-2xl py-12 md:py-20">
         {/* Creator Profile */}
         <CreatorCard
           name={creator.name}
@@ -116,7 +116,7 @@ export default async function CreatorPage({ params }: PageProps) {
         />
 
         {/* Support Form */}
-        <div className="mt-8">
+        <div className="mt-12">
           <SupportForm
             creatorUsername={creator.username!}
             creatorName={displayName}
@@ -126,10 +126,14 @@ export default async function CreatorPage({ params }: PageProps) {
         </div>
 
         {/* Recent Supports */}
-        {creator.recentSupports.length > 0 && (
-          <div className="mt-8 space-y-4">
-            <h2 className="text-lg font-semibold">최근 후원</h2>
-            <div className="space-y-3">
+        <div className="mt-12 space-y-6">
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl font-bold tracking-tight">최근 후원자들</h2>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+          
+          {creator.recentSupports.length > 0 ? (
+            <div className="grid gap-4">
               {creator.recentSupports.map((support: { id: string; supporterName: string; coffeeCount: number; message: string | null; paidAt: Date | null }) => (
                 <SupportCard
                   key={support.id}
@@ -140,16 +144,21 @@ export default async function CreatorPage({ params }: PageProps) {
                 />
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="text-center py-12 bg-card rounded-xl border border-dashed">
+              <p className="text-muted-foreground">아직 후원이 없습니다. 첫 번째 후원자가 되어보세요!</p>
+            </div>
+          )}
+        </div>
 
         {/* Footer */}
-        <div className="mt-12 text-center text-sm text-muted-foreground">
-          <p>
+        <div className="mt-20 text-center text-sm text-muted-foreground">
+          <p className="flex items-center justify-center gap-1.5 font-medium">
             Powered by{' '}
-            <a href="/" className="underline underline-offset-4 hover:text-foreground">
+            <a href="/" className="text-[#6F4E37] hover:text-[#FFDD00] transition-colors font-bold">
               {APP_NAME}
             </a>
+            <span>☕</span>
           </p>
         </div>
       </div>

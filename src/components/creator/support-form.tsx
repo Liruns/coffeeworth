@@ -100,10 +100,10 @@ export function SupportForm({
   };
 
   return (
-    <Card>
+    <Card className="rounded-xl border shadow-sm">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <span>{DEFAULT_COFFEE_EMOJI}</span>
+        <CardTitle className="flex items-center gap-2 text-xl">
+          <span className="text-2xl">{DEFAULT_COFFEE_EMOJI}</span>
           <span>{creatorName}님에게 커피 사주기</span>
         </CardTitle>
       </CardHeader>
@@ -111,7 +111,7 @@ export function SupportForm({
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {/* Coffee Count Selection */}
           <div className="space-y-3">
-            <Label>커피 수량</Label>
+            <Label className="text-base font-semibold">커피 수량</Label>
             <div className="flex flex-wrap gap-2">
               {COFFEE_PRESETS.map((count) => (
                 <Button
@@ -119,20 +119,20 @@ export function SupportForm({
                   type="button"
                   variant={coffeeCount === count && !customCount ? 'default' : 'outline'}
                   className={cn(
-                    'flex-1 min-w-[80px]',
-                    coffeeCount === count && !customCount && 'ring-2 ring-offset-2'
+                    'flex-1 min-w-[80px] h-12 text-lg rounded-lg transition-all',
+                    coffeeCount === count && !customCount && 'ring-2 ring-[#FFDD00] ring-offset-2'
                   )}
                   style={
                     coffeeCount === count && !customCount
-                      ? { backgroundColor: themeColor, borderColor: themeColor }
+                      ? { backgroundColor: '#FFDD00', color: 'black', borderColor: '#FFDD00' }
                       : undefined
                   }
                   onClick={() => handleCoffeeSelect(count)}
                 >
-                  {DEFAULT_COFFEE_EMOJI} x {count}
+                  <span className="mr-1">{DEFAULT_COFFEE_EMOJI}</span> x {count}
                 </Button>
               ))}
-              <div className="flex-1 min-w-[80px]">
+              <div className="flex-1 min-w-[100px]">
                 <Input
                   type="number"
                   placeholder="직접 입력"
@@ -141,18 +141,18 @@ export function SupportForm({
                   value={customCount}
                   onChange={(e) => handleCustomCount(e.target.value)}
                   className={cn(
-                    customCount && 'ring-2 ring-offset-2'
+                    'h-12 text-center text-lg rounded-lg',
+                    customCount && 'ring-2 ring-[#FFDD00] ring-offset-2 border-[#FFDD00]'
                   )}
-                  style={customCount ? { borderColor: themeColor } : undefined}
                 />
               </div>
             </div>
           </div>
 
           {/* Total Amount */}
-          <div className="rounded-lg bg-muted p-4 text-center">
-            <p className="text-sm text-muted-foreground">총 후원 금액</p>
-            <p className="text-2xl font-bold" style={{ color: themeColor }}>
+          <div className="rounded-xl bg-[#FFF8E7] dark:bg-muted p-6 text-center border border-[#FFDD00]/20">
+            <p className="text-sm font-medium text-[#6F4E37] dark:text-muted-foreground uppercase tracking-wider">총 후원 금액</p>
+            <p className="text-3xl font-bold mt-1" style={{ color: '#6F4E37' }}>
               {totalAmount.toLocaleString()}원
             </p>
           </div>
@@ -161,29 +161,32 @@ export function SupportForm({
           <div className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="supporterName">이름 (선택)</Label>
+                <Label htmlFor="supporterName" className="font-medium">이름 (선택)</Label>
                 <Input
                   id="supporterName"
                   placeholder="표시될 이름"
+                  className="h-11 rounded-lg"
                   {...form.register('supporterName')}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="supporterEmail">이메일 (선택)</Label>
+                <Label htmlFor="supporterEmail" className="font-medium">이메일 (선택)</Label>
                 <Input
                   id="supporterEmail"
                   type="email"
                   placeholder="영수증을 받을 이메일"
+                  className="h-11 rounded-lg"
                   {...form.register('supporterEmail')}
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="message">응원 메시지 (선택)</Label>
+              <Label htmlFor="message" className="font-medium">응원 메시지 (선택)</Label>
               <Textarea
                 id="message"
                 placeholder="따뜻한 응원 한마디를 남겨주세요!"
+                className="rounded-lg resize-none"
                 rows={3}
                 maxLength={MAX_MESSAGE_LENGTH}
                 {...form.register('message')}
@@ -193,13 +196,13 @@ export function SupportForm({
               </p>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 pt-2">
               <Checkbox
                 id="isAnonymous"
                 checked={form.watch('isAnonymous')}
                 onCheckedChange={(checked: boolean) => form.setValue('isAnonymous', checked)}
               />
-              <Label htmlFor="isAnonymous" className="text-sm font-normal">
+              <Label htmlFor="isAnonymous" className="text-sm font-medium cursor-pointer">
                 익명으로 후원하기
               </Label>
             </div>
@@ -208,14 +211,13 @@ export function SupportForm({
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full text-lg py-6"
+            className="w-full text-lg py-7 rounded-xl font-bold transition-all bg-[#FFDD00] text-black hover:bg-[#E5C700] shadow-md hover:shadow-lg"
             disabled={isLoading}
-            style={{ backgroundColor: themeColor }}
           >
             {isLoading ? (
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              <Loader2 className="mr-2 h-6 w-6 animate-spin" />
             ) : (
-              <Coffee className="mr-2 h-5 w-5" />
+              <Coffee className="mr-2 h-6 w-6" />
             )}
             {totalAmount.toLocaleString()}원 후원하기
           </Button>
